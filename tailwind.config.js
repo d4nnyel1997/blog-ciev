@@ -15,7 +15,17 @@ module.exports = {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
+            backgroundImage: {
+                'login-bg': "url('/img/bg.png')"
+            }
         },
+        backgroundSize: {
+            'auto': 'auto',
+            'cover': 'cover',
+            'contain': 'contain',
+            '50%': '50%',
+            '16': '4rem',
+        }
     },
 
     plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],

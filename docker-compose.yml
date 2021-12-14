@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+    ngnix:
+        image: nginx:stable-alpine
+        container_name: nginx_blog
+        ports:
+            - "9200:80"
+        volumes:
+            - ./:/var/www/html
+            - ./nginx.default.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - app
+        networks:
+            - mysql_lnet
+
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: app_blog
+        volumes:
+            - ./:/var/www/html
+        networks:
+            - mysql_lnet
+
+networks:
+    mysql_lnet:
+        external: true
