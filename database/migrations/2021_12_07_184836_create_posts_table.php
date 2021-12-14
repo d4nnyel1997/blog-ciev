@@ -17,17 +17,11 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-
             $table->text('extract');
             $table->longText('body');
-
-            $table->enum('status',[1,2])->default(1);
-
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('category_id');
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->enum('status', [1, 2])->default(1);
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

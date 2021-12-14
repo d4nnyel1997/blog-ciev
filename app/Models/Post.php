@@ -4,27 +4,58 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Post extends Model
 {
     use HasFactory;
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+
+    /**
+     * @var array
+     */
+    protected $fillable = ['name', 'slug', 'extract', 'body', 'status', 'user_id', 'category_id'];
+
+
+    /**
+     * @var string[]
+     */
+    protected  $hidden = ['user_id', 'category_id'];
+
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+
+    /**
+     * @return BelongsTo
+     */
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function  tags(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+
+    /**
+     * @return BelongsToMany
+     */
+    public function  tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);
     }
 
-    public function image(): \Illuminate\Database\Eloquent\Relations\MorphOne
+
+    /**
+     * @return MorphOne
+     */
+    public function image(): MorphOne
     {
         return $this->morphOne(Image::class, 'imageable');
     }

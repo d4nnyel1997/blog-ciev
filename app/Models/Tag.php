@@ -4,12 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Tag extends Model
 {
     use HasFactory;
 
-    public function post(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+
+    /**
+     * @var string[]
+     */
+    protected $fillable = ['name', 'slug'];
+
+
+    /**
+     * @return BelongsToMany
+     */
+    public function post(): BelongsToMany
     {
         return $this->belongsToMany(Post::class);
     }
