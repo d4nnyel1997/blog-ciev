@@ -22,6 +22,9 @@
     import Welcome from '@/Jetstream/Welcome.vue'
 
     export default defineComponent({
+        props: {
+            customers: Array
+        },
         components: {
             AppLayout,
             Welcome,
