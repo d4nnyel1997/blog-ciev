@@ -3,9 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class CategoryFactory extends Factory
+class ImageFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,10 +13,8 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
-        $name =  $this->faker->unique()->word(20);
         return [
-            'name' =>$name,
-            'slug' => Str::slug($name)
+            'url' => 'posts/'  . $this->faker->image('public/storage/posts', 640,480, null, false)
         ];
     }
 }
